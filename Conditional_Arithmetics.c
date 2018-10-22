@@ -3,28 +3,36 @@
 
 
 int sum(int number){
-  int result=0;
+  long result=0;
   for (size_t i = 1; i <= number; i++) {
     if (i%3==0||i%5==0){
       result=result+i;
     }
   }
+  printf("resutl= %ld\n",result );
   return result;
 }
 int multiply(int number){
-  int result=1;
+  long result=1;
+  int overflow=0;
   for (size_t i = 1; i <= number; i++) {
-printf("Select a number in the range (1-100): " );
     if (i%3==0||i%5==0){
       result=result*i;
       if(LONG_MAX/result>i){
-        printf("Overflow!\n" );
+        overflow=1;
         break;
       }
     }
   }
+  if (overflow==0) {
+    printf("resutl= %ld\n",result );
+  }
+  else{
+    printf("Overflow!\n");
+  }
   return result;
 }
+
 int main(int argc, char const *argv[]) {
   int selection=0;
   int number=0;
@@ -40,9 +48,8 @@ scanf("%d",&number);
 if (selection==1){
   result=sum(number);
 }
-else{
+else if (selection==2){
   result=multiply(number);
 }
-printf("resutl= %ld\n",result );
   return 0;
 }
